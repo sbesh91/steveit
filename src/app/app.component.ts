@@ -7,5 +7,11 @@ import './test-element.js';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = '';
+  list: string[] = [];
+
+  push($event) {
+    this.list.push($event.data);
+    this.list = this.list.concat([]);
+  }
 }

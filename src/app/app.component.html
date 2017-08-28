@@ -1,3 +1,9 @@
-<input type="text" [(ngModel)]="title" />
+<input 
+  type="text" 
+  (input)="push($event)"
+  [(ngModel)]="title" />
 
-<test-element [name]="title"></test-element>
+<test-element 
+  [name]="title"
+  [items]="list">
+</test-element>

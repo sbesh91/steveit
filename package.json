@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@polymer/iron-list": "next",
     "@polymer/polymer": "next",
     "@webcomponents/webcomponentsjs": "^1.0.8",
     "core-js": "^2.4.1",
@@ -146,6 +147,7 @@
     "selenium-webdriver": "3.0.1",
     "adm-zip": "0.4.7",
     "xml2js": "0.4.19",
-    "@webcomponents/webcomponentsjs": "1.0.8"
+    "@webcomponents/webcomponentsjs": "1.0.8",
+    "@polymer/polymer": "3.0.0-pre.1"
   }
 }
