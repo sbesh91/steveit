@@ -29,8 +29,4 @@ export class AppComponent implements OnInit {
     this.list.push($event.data);
     this.list = this.list.concat([]);
   }
-
-  ngOnDestroy() {
-    
-  }
 }
