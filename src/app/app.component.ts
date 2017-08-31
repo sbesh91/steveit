@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/takeUntil';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import './test-element.js';
 import { Subject } from "rxjs/Subject";
@@ -25,8 +25,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+  @HostListener('custom-add',['$event'])
   push($event) {
-    this.list.push($event.data);
+    console.log($event);
+    this.list.push($event.data || $event.detail);
     this.list = this.list.concat([]);
   }
 }

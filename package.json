@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@polymer/iron-list": "next",
+    "@polymer/paper-input": "^3.0.0-pre.1",
     "@polymer/polymer": "next",
     "@webcomponents/webcomponentsjs": "^1.0.8",
     "angularfire2": "^4.0.0-rc.2",
