@@ -3,7 +3,18 @@
   (input)="push($event)"
   [(ngModel)]="title" />
 
-<test-element 
+<!-- <test-element 
   [name]="title"
   [items]="list">
-</test-element>
+</test-element> -->
+
+<iron-list [items]="list" as="item">
+  <template ngNonBindable>
+    <div>
+      Name: [[item]]
+    </div>
+  </template>
+</iron-list>
+
+<header></header>
+<router-outlet></router-outlet>

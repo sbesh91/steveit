@@ -1,5 +1,8 @@
 {
   "extends": "../tsconfig.json",
+  "angularCompilerOptions": {
+    "enableLegacyTemplate": false
+  },
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",

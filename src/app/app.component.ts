@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/takeUntil';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import './test-element.js';
+import '@polymer/iron-list/iron-list.js';
 import { Subject } from "rxjs/Subject";
 
 @Component({
@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
       .subscribe((data) => {
       console.log(data);
     });
+
+    
   }
 
   @HostListener('custom-add',['$event'])
