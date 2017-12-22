@@ -7,7 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ItemComponent } from './item/item.component';
-import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePageComponent } from './home-page/home-page.component';
 import '@codebakery/origami';
 
@@ -15,17 +15,6 @@ const appRoutes: Routes = [
   { path: '', component: HomePageComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
-
-// { path: 'hero/:id',      component: HeroDetailComponent },
-  // {
-  //   path: 'heroes',
-  //   component: HeroListComponent,
-  //   data: { title: 'Heroes List' }
-  // },
-  // { path: '',
-  //   redirectTo: '/heroes',
-  //   pathMatch: 'full'
-  // },
 
 @NgModule({
   declarations: [
