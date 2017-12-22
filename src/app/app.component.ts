@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import '@polymer/iron-list/iron-list.js';
 
 @Component({
   selector: 'app-root',

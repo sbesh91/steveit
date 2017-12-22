@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { ItemComponent } from './item/item.component';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePageComponent } from './home-page/home-page.component';
-import '@codebakery/origami';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent },
