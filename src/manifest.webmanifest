@@ -1,0 +1,9 @@
+{
+  "name": "steveit",
+  "short_name": "steveit",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "An inter-family social network",
+  "icons": []
+}
