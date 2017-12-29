@@ -1,3 +1,4 @@
+import { BasePageComponent } from './base-page/base-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,29 +7,32 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { ItemComponent } from './item/item.component';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { HomePageComponent } from './home-page/home-page.component';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: BasePageComponent },
+  { path: 'app', loadChildren: './home/home.module#HomeModule' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemComponent,
-    HomePageComponent,
-    PageNotFoundComponent
+    BasePageComponent,
+    PageNotFoundComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
-  providers: [AngularFireDatabase],
+  providers: [],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
