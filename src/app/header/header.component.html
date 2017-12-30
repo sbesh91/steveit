@@ -1,8 +1,24 @@
-<div *ngIf="fireAuth.authState | async; let user; else showLogin">
-  <h1>Hello {{ user.displayName }}!</h1>
-  <button (click)="logout()">Logout</button>
-</div>
+<section *ngIf="fireAuth.authState | async; let user; else showLogin">
+  <div class="display">
+    {{user.displayName}}
+  </div>
+  <div class="action">
+    <button 
+      mat-button
+      color="primary" 
+      (click)="logout()">Logout</button>
+  </div>
+</section>
 <ng-template #showLogin>
-  <p>Please login.</p>
-  <button (click)="login()">Login with Google</button>
+  <section>
+    <div class="display">
+      
+    </div>
+    <div class="action">
+      <button
+        mat-raised-button 
+        color="primary" 
+        (click)="login()">Login with Google</button>
+    </div>
+  </section>
 </ng-template>
