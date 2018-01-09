@@ -1,0 +1,30 @@
+<header>
+  Add Post
+</header>
+<form [formGroup]="form" (submit)="addPost($event)">
+  <main>
+    <mat-form-field>
+      <input matInput placeholder="Label" name="label" formControlName="label" required>
+      <mat-error></mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Link" name="link" formControlName="link" required>
+      <mat-error></mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Post Body" name="body" formControlName="body" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Category" name="type" formControlName="type">
+        <mat-option *ngFor="let type of types | async" [value]="type.Label">{{type.Label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </main>
+  <footer>
+    <button mat-button type="button">Cancel</button>
+    <button mat-raised-button color="accent" type="submit">Submit</button>
+  </footer>
+</form>
