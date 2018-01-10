@@ -6,6 +6,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeFragementComponent } from './home-fragement/home-fragement.component';
 import { AddPostFragmentComponent } from './add-post-fragment/add-post-fragment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationService } from '../services/pagination.service';
 
 
 @NgModule({
@@ -17,13 +18,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     HomeFragementComponent,
     AddPostFragmentComponent
   ],
-  providers: [ ],
+  providers: [
+    PaginationService
+  ],
   entryComponents: [
     AddPostFragmentComponent
   ]

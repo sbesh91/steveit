@@ -6,6 +6,8 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddPostFragmentComponent } from '../add-post-fragment/add-post-fragment.component';
 import { Post } from '../../models/post';
 import { PostType } from '../../models/post_type';
+import { PaginationService } from '../../services/pagination.service';
+import { QueryConfig } from '../../services/QueryConfig';
 
 @Component({
   selector: 'app-home-fragement',
@@ -14,15 +16,18 @@ import { PostType } from '../../models/post_type';
 })
 export class HomeFragementComponent implements OnInit {
 
-  posts: Observable<Array<Post>>;
   postsCollection: AngularFirestoreCollection<Post>;
+  page = 0;
+  pageSize = 1;
 
   types: Observable<Array<PostType>>;
   typesCollection: AngularFirestoreCollection<PostType>;
+
   addDialog: MatDialogRef<AddPostFragmentComponent>;
 
   constructor(
     public fireStore: AngularFirestore,
+    public pagination: PaginationService,
     private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -35,25 +40,46 @@ export class HomeFragementComponent implements OnInit {
     this.types = this.typesCollection.valueChanges();
   }
 
-  private getPosts() {
+  private async getPosts() {
+    this.pagination.init('posts', 'PostDate', {
+      limit: this.pageSize,
+      reverse: true,
+      prepend: false
+    } as QueryConfig);
+
     this.postsCollection = this.fireStore.collection<Post>('posts');
-    this.posts = this.postsCollection.valueChanges();
   }
 
-  addPost(post: Post) {
-    this.postsCollection.add(post);
+  private addPost(post: Post) {
+    this.postsCollection.add({
+      Label: post.Label,
+      Url: post.Url,
+      Body: post.Body,
+      Type: post.Type,
+      PostDate: post.PostDate,
+      Score: post.Score,
+      Votes: post.Votes,
+      Comments: []
+    } as Post);
+  }
+
+  nextPage() {
+    this.pagination.more();
   }
 
   async openAddDialog() {
     this.addDialog = this.dialog.open(AddPostFragmentComponent, {
       minWidth: 300,
+      disableClose: true,
       data: {
         types: this.types
       }
      });
 
-    const closed = await this.addDialog.afterClosed().toPromise();
-    console.log(closed);
+    const $event = await this.addDialog.afterClosed().toPromise();
+    if ($event) {
+      this.addPost($event);
+    }
   }
 
   closeAddDialog() {

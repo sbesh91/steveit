@@ -1,6 +1,9 @@
-<div *ngFor="let post of posts | async">
-  {{ post.title }}
+<div *ngFor="let post of pagination.data | async">
+  {{ post.Label }}
 </div>
+
+<p *ngIf="page.done | async">I ran out of posts!</p>
+<div *ngIf="page.loading | async">Loading</div>
 
 <button
   id="addPost"
