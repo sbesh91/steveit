@@ -1,6 +1,9 @@
 import { Comment } from './comment';
 import { Vote } from './vote';
 import { PostType } from './post_type';
+import { User } from './user';
+import * as firebase from 'firebase/app';
+
 
 export class Post {
 
@@ -23,4 +26,6 @@ export class Post {
   Score: number;
   Votes: Vote[];
   Comments: Comment[];
+  User: User;
+  doc: firebase.firestore.DocumentSnapshot;
 }

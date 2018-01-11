@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog, MatDialogRef } from '@angular/material';
@@ -8,6 +8,7 @@ import { Post } from '../../models/post';
 import { PostType } from '../../models/post_type';
 import { PaginationService } from '../../services/pagination.service';
 import { QueryConfig } from '../../services/QueryConfig';
+import { Vote } from '../../models/vote';
 
 @Component({
   selector: 'app-home-fragement',
@@ -18,7 +19,7 @@ export class HomeFragementComponent implements OnInit {
 
   postsCollection: AngularFirestoreCollection<Post>;
   page = 0;
-  pageSize = 1;
+  pageSize = 20;
 
   types: Observable<Array<PostType>>;
   typesCollection: AngularFirestoreCollection<PostType>;
@@ -37,13 +38,18 @@ export class HomeFragementComponent implements OnInit {
 
   private getTypes() {
     this.typesCollection = this.fireStore.collection<PostType>('types');
-    this.types = this.typesCollection.valueChanges();
+    this.types = this.typesCollection.valueChanges(['added', 'removed']);
   }
 
   private async getPosts() {
-    this.pagination.init('posts', 'PostDate', {
+    this.pagination.init({
+      path: 'posts',
+      fields: [
+        { field: 'PostDate', direction: 'desc' },
+        { field: 'Score', direction: 'desc' },
+      ],
+      filters: [],
       limit: this.pageSize,
-      reverse: true,
       prepend: false
     } as QueryConfig);
 
@@ -51,16 +57,24 @@ export class HomeFragementComponent implements OnInit {
   }
 
   private addPost(post: Post) {
-    this.postsCollection.add({
-      Label: post.Label,
-      Url: post.Url,
-      Body: post.Body,
-      Type: post.Type,
-      PostDate: post.PostDate,
-      Score: post.Score,
-      Votes: post.Votes,
-      Comments: []
-    } as Post);
+    this.postsCollection.add(post);
+  }
+
+  private getPost(id: string): AngularFirestoreDocument<Post> {
+    return this.postsCollection.doc<Post>(id);
+  }
+
+  private async updatePost(post: Post): Promise<void> {
+    return await this.getPost(post.doc.id).update(post);
+  }
+
+  openPost(post: Post) {
+    this.getPost(post.doc.id);
+  }
+
+  vote(vote: Vote, post: Post) {
+    // todo need to be able to look up the old vote to update it
+
   }
 
   nextPage() {

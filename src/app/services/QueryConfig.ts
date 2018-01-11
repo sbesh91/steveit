@@ -1,7 +1,18 @@
 export class QueryConfig {
-  path: string; //  path to collection
-  field: string; // field to orderBy
-  limit: number; // limit per query
-  reverse: boolean; // reverse order?
-  prepend: boolean; // prepend to source?
+  path: string;
+  fields: FieldConfig[];
+  filters: FilterConfig[];
+  limit: number;
+  prepend: boolean;
+}
+
+export class FieldConfig {
+  field: string;
+  direction: 'desc' | 'asc';
+}
+
+export class FilterConfig {
+  field: string;
+  compare: '<' | '<=' | '==' | '>' | '>=';
+  value: any;
 }
