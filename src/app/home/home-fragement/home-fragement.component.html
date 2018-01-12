@@ -1,11 +1,18 @@
-<div 
-  *ngFor="let post of pagination.data | async"
-  (click)="openPost(post)">
-  {{ post.Label }}
+<div class="posts">
+  <a
+    class="post"
+    *ngFor="let post of pagination.data | async"
+    [routerLink]="['posts/', post.doc.id]">
+    
+    <div>{{ post.Score }}</div>
+    <a class="label">
+      {{ post.Label }}
+    </a>  
+  </a>
 </div>
 
-<p *ngIf="pagination.done | async">I ran out of posts!</p>
-<div *ngIf="pagination.loading | async">Loading</div>
+<!-- <p *ngIf="pagination.done | async">I ran out of posts!</p>
+<div *ngIf="pagination.loading | async">Loading</div> -->
 
 <button
   id="addPost"

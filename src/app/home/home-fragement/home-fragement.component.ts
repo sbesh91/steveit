@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog, MatDialogRef } from '@angular/material';
@@ -9,6 +9,7 @@ import { PostType } from '../../models/post_type';
 import { PaginationService } from '../../services/pagination.service';
 import { QueryConfig } from '../../services/QueryConfig';
 import { Vote } from '../../models/vote';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-home-fragement',
@@ -68,6 +69,14 @@ export class HomeFragementComponent implements OnInit {
     return await this.getPost(post.doc.id).update(post);
   }
 
+  trackPostBy(post: Post) {
+    if (!post || !post.doc) {
+      return 0;
+    }
+
+    return post.doc.id;
+  }
+
   openPost(post: Post) {
     this.getPost(post.doc.id);
   }
@@ -88,7 +97,7 @@ export class HomeFragementComponent implements OnInit {
       data: {
         types: this.types
       }
-     });
+    });
 
     const $event = await this.addDialog.afterClosed().toPromise();
     if ($event) {

@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 :host {
   display: block;
 }
@@ -6,4 +8,12 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+}
+
+.post{
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid mat-color($mat-grey, 300);
+  padding: 1rem;  
+  
 }

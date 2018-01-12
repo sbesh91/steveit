@@ -16,24 +16,29 @@ export class PaginationService {
   private _data = new BehaviorSubject([]);
   private query: QueryConfig;
   // Observable data
-  data: Observable<any>;
+  data: Observable<any> = this._data.asObservable();
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
   constructor(private afs: AngularFirestore) { }
   // Initial query sets options and defines the Observable
   // passing opts will override the defaults
   init(opts: QueryConfig) {
+    this._done = new BehaviorSubject(false);
+    this._loading = new BehaviorSubject(false);
+    this._data = new BehaviorSubject([]);
+
     this.query = opts;
 
     const first = this.afs.collection(this.query.path, (ref: firebase.firestore.CollectionReference | firebase.firestore.Query) => {
       return this.setFiltersAndSorts(ref);
     });
+
     this.mapAndUpdate(first);
     // Create the observable array for consumption in components
     this.data = this._data.asObservable()
-        .scan( (acc, val) => {
-          return this.query.prepend ? val.concat(acc) : acc.concat(val);
-        });
+      .scan((acc, val) => {
+        return this.query.prepend ? val.concat(acc) : acc.concat(val);
+      });
   }
 
   // Retrieves additional data from firestore
@@ -79,7 +84,7 @@ export class PaginationService {
           const data = snap.payload.doc.data();
           const doc = snap.payload.doc;
           return { ...data, doc };
-      });
+        });
 
         // If prepending, reverse the batch order
         values = this.query.prepend ? values.reverse() : values;
@@ -90,8 +95,8 @@ export class PaginationService {
         if (!values.length) {
           this._done.next(true);
         }
-    })
-    .take(1)
-    .subscribe();
+      })
+      .take(1)
+      .subscribe();
   }
 }
