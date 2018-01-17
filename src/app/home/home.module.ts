@@ -8,6 +8,7 @@ import { AddPostFragmentComponent } from './add-post-fragment/add-post-fragment.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationService } from '../services/pagination.service';
 import { PostComponent } from './post/post.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PostComponent } from './post/post.component';
   declarations: [
     HomeFragementComponent,
     AddPostFragmentComponent,
-    PostComponent
+    PostComponent,
+    HeaderComponent
   ],
   providers: [
     PaginationService

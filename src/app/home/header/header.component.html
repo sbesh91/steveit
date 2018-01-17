@@ -1,0 +1,19 @@
+<section *ngIf="fireAuth.authState | async; let user">
+  <button 
+    *ngIf="showBackButton"
+    mat-icon-button
+    class="back"
+    (click)="back()">
+
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <div class="display">
+    {{user.displayName}}
+  </div>
+  <div class="action">
+    <button 
+      mat-button
+      color="primary" 
+      (click)="logout()">Logout</button>
+  </div>
+</section>

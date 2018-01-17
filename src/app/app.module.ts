@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
-import { HeaderComponent } from './header/header.component';
 
 const appRoutes: Routes = [
   { path: '', component: BasePageComponent },
@@ -22,8 +21,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BasePageComponent,
-    PageNotFoundComponent,
-    HeaderComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
