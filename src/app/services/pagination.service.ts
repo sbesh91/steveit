@@ -29,7 +29,7 @@ export class PaginationService {
 
     this.query = opts;
 
-    const first = this.afs.collection(this.query.path, (ref: firebase.firestore.CollectionReference | firebase.firestore.Query) => {
+    const first = this.afs.collection(this.query.path, (ref) => {
       return this.setFiltersAndSorts(ref);
     });
 
@@ -44,14 +44,14 @@ export class PaginationService {
   // Retrieves additional data from firestore
   more() {
     const cursor = this.getCursor();
-    const more = this.afs.collection(this.query.path, (ref: firebase.firestore.CollectionReference | firebase.firestore.Query) => {
+    const more = this.afs.collection(this.query.path, (ref) => {
       ref = this.setFiltersAndSorts(ref);
       return ref.startAfter(cursor);
     });
     this.mapAndUpdate(more);
   }
 
-  private setFiltersAndSorts(queryRef: firebase.firestore.CollectionReference | firebase.firestore.Query) {
+  private setFiltersAndSorts(queryRef) {
     for (const field of this.query.fields) {
       queryRef = queryRef.orderBy(field.field, field.direction);
     }
