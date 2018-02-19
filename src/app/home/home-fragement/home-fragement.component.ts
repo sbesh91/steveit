@@ -58,7 +58,7 @@ export class HomeFragementComponent implements OnInit {
   }
 
   private addPost(post: Post) {
-    this.postsCollection.add(post);
+    this.postsCollection.add({ ...post });
   }
 
   private getPost(id: string): AngularFirestoreDocument<Post> {
@@ -83,7 +83,6 @@ export class HomeFragementComponent implements OnInit {
 
   vote(vote: Vote, post: Post) {
     // todo need to be able to look up the old vote to update it
-
   }
 
   nextPage() {
